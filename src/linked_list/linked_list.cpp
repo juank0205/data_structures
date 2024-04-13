@@ -61,13 +61,21 @@ template <typename T> void LinkedList<T>::push_back(T item) {
 }
 
 template <typename T> T LinkedList<T>::pop_back() {
-  Node *current = first;
-  while (current->getNext() != last)
-    current = current->getNext();
+  Node *precedent = getNode(size-2);
   T temp = last->getData();
-  last = current;
-  current->setNext(nullptr);
+  last = precedent;
+  precedent->setNext(nullptr);
+  size--;
   return temp;
+}
+
+template <typename T> typename LinkedList<T>::Node* LinkedList<T>::getNode(int index){
+  if (index >= size)
+    return nullptr;
+  Node *current = first; 
+  for (;index>0;index--)
+    current = current->getNext();
+  return current; 
 }
 
 template class LinkedList<int>;

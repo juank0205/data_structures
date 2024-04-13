@@ -1,7 +1,6 @@
 #pragma once
 
-template <typename T>
-class LinkedList {
+template <typename T> class LinkedList {
 private:
   class Node {
   private:
@@ -19,6 +18,8 @@ private:
   Node *first;
   Node *last;
   int size;
+
+  Node *getNode(int index);
 
 public:
   LinkedList() : first(nullptr), last(nullptr), size(0) {}
