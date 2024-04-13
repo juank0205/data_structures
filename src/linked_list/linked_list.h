@@ -1,6 +1,7 @@
 #pragma once
 
-template <typename T> class LinkedList {
+template <typename T>
+class LinkedList {
 private:
   class Node {
   private:
@@ -9,7 +10,7 @@ private:
 
   public:
     Node(T newData) : data(newData), next(nullptr) {}
-    int getData();
+    T getData();
     Node *getNext();
     void setData(T data);
     void setNext(Node *next);
@@ -20,20 +21,19 @@ private:
   int size;
 
 public:
-  LinkedList() : first(nullptr), last(nullptr) {}
+  LinkedList() : first(nullptr), last(nullptr), size(0) {}
   LinkedList(T item);
+  ~LinkedList();
 
   int getSize();
-  int getFirst();
-  int getLast();
+  T getFirst();
+  T getLast();
 
   void printList();
-  /*
   void insert(T item, int index);
   void deleteIndex(int index);
   void deleteItem(int item);
   T getItemByIndex(int index);
-  void pop_back();
-  */
+  T pop_back();
   void push_back(T item);
 };

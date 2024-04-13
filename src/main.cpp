@@ -8,5 +8,6 @@ int main(int argc, char *arvg[]) {
   myList->push_back(8);
   myList->push_back(9);
   myList->printList();
+  delete myList;
   return 0;
 }
