@@ -1,0 +1,1 @@
+clang++ CMakeFiles/out.dir/main.cpp.o -o out  -Wl,-rpath,/mnt/e/dev/c++/data_structures/build/src/linked_list linked_list/liblinked_list.so 
