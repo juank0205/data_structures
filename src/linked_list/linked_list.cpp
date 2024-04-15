@@ -1,5 +1,6 @@
 #include "linked_list.h"
 #include <iostream>
+#include <stdexcept>
 
 template <typename T> T LinkedList<T>::Node::getData() { return data; }
 template <typename T>
@@ -61,7 +62,7 @@ template <typename T> void LinkedList<T>::push_back(T item) {
 }
 
 template <typename T> T LinkedList<T>::pop_back() {
-  Node *precedent = getNode(size-2);
+  Node *precedent = getNode(size - 2);
   T temp = last->getData();
   last = precedent;
   precedent->setNext(nullptr);
@@ -69,13 +70,78 @@ template <typename T> T LinkedList<T>::pop_back() {
   return temp;
 }
 
-template <typename T> typename LinkedList<T>::Node* LinkedList<T>::getNode(int index){
+template <typename T>
+typename LinkedList<T>::Node *LinkedList<T>::getNode(int index) {
   if (index >= size)
     return nullptr;
-  Node *current = first; 
-  for (;index>0;index--)
+  Node *current = first;
+  for (; index > 0; index--)
     current = current->getNext();
-  return current; 
+  return current;
+}
+
+template <typename T> T LinkedList<T>::getItemByIndex(int index) {
+  Node* node = getNode(index);
+  return node->getData();
+}
+
+template <typename T> void LinkedList<T>::deleteIndex(int index) {
+  if (index >= size)
+    throw std::out_of_range("Not valid index");
+  if (index == 0)
+    first = first->getNext();
+  if (index == size-1){
+    Node* current = getNode(index-1);
+    last = current;
+    current->setNext(nullptr);
+  } else {
+    Node* current = first->getNext();
+    Node* precedent = first;
+    while (index > 1){
+      precedent = current;
+      current = current->getNext();
+      index--;
+    }
+    precedent->setNext(current->getNext());
+  }
+  size--;
+}
+
+template <typename T> void LinkedList<T>::deleteItem(int item){
+  Node* current = first->getNext();
+  Node* precedent = first;
+  while (current != nullptr) {
+    if (current->getData() == item){
+      precedent->setNext(current->getNext());
+      size--;
+      return;
+    }
+    precedent = current; 
+    current = current->getNext();
+  }
+  throw std::invalid_argument("Item not found");
+}
+
+template <typename T> void LinkedList<T>::insert(T item, int index){
+  if (index >= size)
+    throw std::out_of_range("Not valid index");
+  Node *newNode = new Node(item);
+  if (index == 0){
+    newNode->setNext(first);  
+    first = newNode;
+    size++;
+    return;
+  }
+  Node *current = first->getNext();
+  Node *precedent = first;
+  while (index>1){
+    precedent = current;
+    current = current->getNext();
+    index--;
+  }
+  precedent->setNext(newNode);
+  newNode->setNext(current);
+  size++;
 }
 
 template class LinkedList<int>;
