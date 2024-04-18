@@ -144,6 +144,14 @@ template <typename T> void LinkedList<T>::insert(T item, int index){
   size++;
 }
 
+template <typename T> void LinkedList<T>::callback(T(* func)(T)){
+  Node *current = first;
+  while (current != nullptr) {
+    current->setData(func(current->getData()));
+    current = current->getNext();
+  }
+}
+
 template class LinkedList<int>;
 template class LinkedList<short>;
 template class LinkedList<long>;

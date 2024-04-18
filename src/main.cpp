@@ -1,5 +1,7 @@
 #include "linked_list/linked_list.h"
 
+int duplicate(int x) { return x*2; }
+
 int main(int argc, char *arvg[]) {
   LinkedList<int> *myList = new LinkedList<int>();
   myList->push_back(1);
@@ -9,9 +11,7 @@ int main(int argc, char *arvg[]) {
   myList->insert(7, 0);
   myList->insert(10, 4);
   myList->printList();
-  myList->deleteIndex(2);
-  myList->printList();
-  myList->deleteIndex(0);
+  myList->callback(duplicate);
   myList->printList();
   delete myList;
   return 0;

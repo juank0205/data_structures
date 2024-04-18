@@ -37,4 +37,5 @@ public:
   T getItemByIndex(int index);
   T pop_back();
   void push_back(T item);
+  void callback(T(* func)(T) );
 };
