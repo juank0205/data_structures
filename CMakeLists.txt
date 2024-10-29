@@ -16,3 +16,4 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
 add_subdirectory(linked_list)
+add_subdirectory(vector)
